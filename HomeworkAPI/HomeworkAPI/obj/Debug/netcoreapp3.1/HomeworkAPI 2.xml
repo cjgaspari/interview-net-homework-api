@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HomeworkAPI</name>
+    </assembly>
+    <members>
+        <member name="T:HomeworkAPI.Controllers.AssignmentController">
+            <summary>
+            This is the assignment controller, as is
+            </summary>
+        </member>
+        <member name="M:HomeworkAPI.Controllers.AssignmentController.Get">
+            <summary>
+            This will get all of the items, if the id is 3 ;)
+            Displaying how you can override a virtual method
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HomeworkAPI.Controllers.HomeworkController`2.Get">
+            <summary>
+            This will get all of the items.
+            </summary>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

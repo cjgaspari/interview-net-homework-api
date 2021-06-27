@@ -1,0 +1,32 @@
+﻿<Properties StartupConfiguration="{B79A55AE-F11D-4EF1-B88D-9E47AD24135E}|Default">
+  <MonoDevelop.Ide.ItemProperties.HomeworkAPI PreferredExecutionTarget="/Applications/Microsoft Edge.app" />
+  <MonoDevelop.Ide.Workbench>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="HomeworkAPI" expanded="True">
+            <Node name="HomeworkAPI" expanded="True">
+              <Node name="Authorization" expanded="True">
+                <Node name="Services" expanded="True" />
+              </Node>
+              <Node name="Controllers" expanded="True" />
+              <Node name="Data" expanded="True">
+                <Node name="EFCore" expanded="True">
+                  <Node name="HomeworkContext.cs" selected="True" />
+                </Node>
+                <Node name="Interfaces" expanded="True" />
+                <Node name="Models" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

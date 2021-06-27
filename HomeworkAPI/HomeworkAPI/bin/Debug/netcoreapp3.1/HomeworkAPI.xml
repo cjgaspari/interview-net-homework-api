@@ -1,0 +1,239 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>HomeworkAPI</name>
+    </assembly>
+    <members>
+        <member name="T:HomeworkAPI.Authorization.BasicAuthenticationAttribute">
+            <summary>
+            Creating an attribute for API authentication
+            This will be for Authorized Student access
+            </summary>
+        </member>
+        <member name="T:HomeworkAPI.Authorization.TeacherAuthenticationAttribute">
+            <summary>
+            This attribute will be for Teacher access
+            </summary>
+        </member>
+        <member name="M:HomeworkAPI.Authorization.Services.UserService.IsValidUser(System.String,System.String,System.String)">
+            <summary>
+            This is just a stub service that will always return true if a username and password are provided
+            In some cases, "teacher" or "admin" can be used to test certain features
+            </summary>
+            <param name="userName"></param>
+            <param name="password"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HomeworkAPI.Controllers.AssignmentController">
+            <summary>
+            Handles the API endpoints to get the list of assignments, update grades if you are a teacher, and upload assignments as a student. 
+            </summary>
+        </member>
+        <member name="M:HomeworkAPI.Controllers.AssignmentController.Post(System.String)">
+            <summary>
+            allows a student to submit an assignment
+            </summary>
+            <param name="homework"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HomeworkAPI.Controllers.AssignmentController.Delete(System.Int32)">
+            <summary>
+            allows a teacher to delete an assignment submission
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HomeworkAPI.Controllers.AssignmentController.GetStudentAssignments(System.String,System.String)">
+            <summary>
+            allows a student to get their assignments
+            It also allows for filtering by Assignment Name, and Grade
+            </summary>
+            <returns></returns>    
+        </member>
+        <member name="M:HomeworkAPI.Controllers.AssignmentController.GetAssignments(System.String,System.String,System.String,System.DateTime,System.DateTime)">
+            <summary>
+            allows a teacher to get all assignments
+            It also allows for filtering by Assignment Name, Grade, Student Name, and Date range
+            </summary>
+            <returns></returns> 
+        </member>
+        <member name="M:HomeworkAPI.Controllers.AssignmentController.UpdateGrade(System.Int32,System.String)">
+            <summary>
+            allows a teacher to update an assignments grade
+            </summary>
+            <param name="id"></param>
+            <param name="homework"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HomeworkAPI.Controllers.AssignmentController.Get">
+            <summary>
+            The following code can be ignored.
+            These are endpoints that we are overriding, and returning null for this demo project
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:HomeworkAPI.Controllers.AttachmentController">
+            <summary>
+            The attachment controller mainly inherits from the HomeworkController
+            </summary>
+        </member>
+        <member name="T:HomeworkAPI.Controllers.HomeworkController`2">
+            <summary>
+            Attachments, and Notes will share the bulk of these methods.
+            Assignments will mainly override, or create entirely new endpoint methods
+            Created as an abstract class, with virtual methods, so that it can be overriden, extended, or completely replaced. 
+            </summary>
+            <typeparam name="TEntity"></typeparam>
+            <typeparam name="TRepository"></typeparam>
+        </member>
+        <member name="M:HomeworkAPI.Controllers.HomeworkController`2.Get(System.Int32)">
+            <summary>
+            get a specific entity by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HomeworkAPI.Controllers.HomeworkController`2.Post(`0)">
+            <summary>
+            post an entity
+            </summary>
+            <param name="homework"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HomeworkAPI.Controllers.HomeworkController`2.Delete(System.Int32)">
+            <summary>
+            delete an entity by id, if you are a teacher
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HomeworkAPI.Controllers.NoteController.Post(HomeworkAPI.Data.Models.Note)">
+            <summary>
+            allows a teacher the ability to add a note to an assignment
+            </summary>
+            <param name="homework"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HomeworkAPI.Data.EFCore.AssignmentRepository">
+            <summary>
+            This repository handles the bulk of the business logic
+            In order to return associated notes and attachments, the Get methods have been overriden from the abstract class.
+            </summary>
+        </member>
+        <member name="M:HomeworkAPI.Data.EFCore.AssignmentRepository.GetAll">
+            <summary>
+            Overriding the GetAll method from HomeworkRepository, as an Assignment can include attachments and notes.
+            Because of this, we need to make sure we include these associated items when we get the list of assignments. 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HomeworkAPI.Data.EFCore.AssignmentRepository.GetAssignments(System.String,System.String,System.String)">
+            <summary>
+            Use this method to get assignments, filter by assignment name, grade, and student name
+            This method will mainly be used as an example for retreiving student data
+            </summary>
+            <param name="assignmentName"></param>
+            <param name="grade"></param>
+            <param name="studentName"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HomeworkAPI.Data.EFCore.AssignmentRepository.GetAssignments(System.String,System.String,System.String,System.DateTime,System.DateTime)">
+            <summary>
+            Use this method to get assignments for teachers
+            Filter by assignment name, grade, student name, min, and max date
+            </summary>
+            <param name="assignmentName"></param>
+            <param name="grade"></param>
+            <param name="studentName"></param>
+            <param name="minDate"></param>
+            <param name="maxDate"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HomeworkAPI.Data.EFCore.AssignmentRepository.UpdateGrade(System.Int32,System.String)">
+            <summary>
+            This method updates an assignments grade
+            </summary>
+            <param name="assignmentId"></param>
+            <param name="grade"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HomeworkAPI.Data.EFCore.AssignmentRepository.SubmitAssignment(System.String,System.String)">
+            <summary>
+            This method is to submit an assignment
+            Student needs to only provide the assignmentName
+            studentName is passed from login (username) 
+            </summary>
+            <param name="assignmentName"></param>
+            <param name="studentName"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HomeworkAPI.Data.EFCore.AttachmentRepository">
+            <summary>
+            Students can add multiple attachments to their assignment
+            For now, this class will inherit from HomeworkRepository 
+            </summary>
+        </member>
+        <member name="T:HomeworkAPI.Data.EFCore.HomeworkContext">
+            <summary>
+            DbContext to create the EntityFramework Core SQLite database
+            </summary>
+        </member>
+        <member name="T:HomeworkAPI.Data.EFCore.HomeworkRespository`2">
+            <summary>
+            This abstract class sets up virtual methods with base functionality for all the repositories to use
+            These methods can be overriden to extend, or modify as needed
+            Notes and assignments will mainly inherit, whereas Assignments will override and add additional functionality
+            </summary>
+        </member>
+        <member name="M:HomeworkAPI.Data.EFCore.HomeworkRespository`2.Add(`0)">
+            <summary>
+            Virtual method for Adding entity.
+            Can be used as is, or modified if needed.
+            </summary>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HomeworkAPI.Data.EFCore.HomeworkRespository`2.Delete(System.Int32)">
+            <summary>
+            Virtual method for Deleting entity.
+            This will be used for attachment and note endpoints. 
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HomeworkAPI.Data.EFCore.HomeworkRespository`2.Get(System.Int32)">
+            <summary>
+            Virtual method for Getting entity.
+            This will be used by attachment and note endpoints. 
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:HomeworkAPI.Data.EFCore.HomeworkRespository`2.GetAll">
+            <summary>
+            Virtual method for Getting all entities. 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:HomeworkAPI.Data.EFCore.HomeworkRespository`2.Update(`0)">
+            <summary>
+            Virtual method for updating entity. 
+            </summary>
+            <param name="entity"></param>
+            <returns></returns>
+        </member>
+        <member name="T:HomeworkAPI.Data.EFCore.NoteRepository">
+            <summary>
+            Note was made as a seperate entity from assignment to allow teachers to add multiple comments. 
+            </summary>
+        </member>
+        <member name="T:HomeworkAPI.Data.Interfaces.IHomeworkRepository`1">
+            <summary>
+            Created an interface, as we will have three entities: Assignments, Notes, and Attachments.
+            Assignments can have a list of Notes and Attachments.
+            This interface sets up the general structure for the implementation for these entities. 
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+    </members>
+</doc>
